@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Flight.
+    -->
+    <changeSet id="20230110175053-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="create_by_id"
+                                 baseTableName="flight"
+                                 constraintName="fk_flight__create_by_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="from_country_id"
+                                 baseTableName="flight"
+                                 constraintName="fk_flight__from_country_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="country"/>
+
+        <addForeignKeyConstraint baseColumnNames="to_country_id"
+                                 baseTableName="flight"
+                                 constraintName="fk_flight__to_country_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="country"/>
+
+        <addForeignKeyConstraint baseColumnNames="from_state_id"
+                                 baseTableName="flight"
+                                 constraintName="fk_flight__from_state_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="state_province"/>
+
+        <addForeignKeyConstraint baseColumnNames="to_state_id"
+                                 baseTableName="flight"
+                                 constraintName="fk_flight__to_state_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="state_province"/>
+
+        <addForeignKeyConstraint baseColumnNames="from_city_id"
+                                 baseTableName="flight"
+                                 constraintName="fk_flight__from_city_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="city"/>
+
+        <addForeignKeyConstraint baseColumnNames="to_city_id"
+                                 baseTableName="flight"
+                                 constraintName="fk_flight__to_city_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="city"/>
+
+        <addForeignKeyConstraint baseColumnNames="flight_id"
+                                 baseTableName="rel_flight__available_item_types"
+                                 constraintName="fk_rel_flight__available_item_types__flight_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="flight"/>
+
+        <addForeignKeyConstraint baseColumnNames="available_item_types_id"
+                                 baseTableName="rel_flight__available_item_types"
+                                 constraintName="fk_rel_flight__available_item_types__available_item_types_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="item_types"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,41 @@
+{
+  "freelancerCourierApp": {
+    "cargoRequest": {
+      "home": {
+        "title": "Cargo Requests",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Cargo Request",
+        "createOrEditLabel": "Create or edit a Cargo Request",
+        "notFound": "No Cargo Requests found"
+      },
+      "created": "A new Cargo Request is created with identifier {{ param }}",
+      "updated": "A Cargo Request is updated with identifier {{ param }}",
+      "deleted": "A Cargo Request is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Cargo Request {{ id }}?"
+      },
+      "detail": {
+        "title": "Cargo Request"
+      },
+      "id": "ID",
+      "budget": "Budget",
+      "isToDoor": "Is To Door",
+      "createDate": "Create Date",
+      "agreedPrice": "Agreed Price",
+      "cargoRequestDetails": "Cargo Request Details",
+      "ask": "Ask",
+      "bid": "Bid",
+      "status": "Status",
+      "createBy": "Create By",
+      "takenBy": "Taken By",
+      "fromCountry": "From Country",
+      "toCountry": "To Country",
+      "fromState": "From State",
+      "toState": "To State",
+      "fromCity": "From City",
+      "toCity": "To City",
+      "reqItemTypes": "Req Item Types",
+      "userRate": "User Rate"
+    }
+  }
+}

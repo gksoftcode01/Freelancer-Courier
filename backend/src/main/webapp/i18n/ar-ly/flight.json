@@ -1,0 +1,38 @@
+{
+  "freelancerCourierApp": {
+    "flight": {
+      "home": {
+        "title": "Flights",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Flight",
+        "createOrEditLabel": "Create or edit a Flight",
+        "notFound": "No Flights found"
+      },
+      "created": "A new Flight is created with identifier {{ param }}",
+      "updated": "A Flight is updated with identifier {{ param }}",
+      "deleted": "A Flight is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Flight {{ id }}?"
+      },
+      "detail": {
+        "title": "Flight"
+      },
+      "id": "ID",
+      "flightDate": "Flight Date",
+      "maxWeight": "Max Weight",
+      "notes": "Notes",
+      "budget": "Budget",
+      "createDate": "Create Date",
+      "toDoorAvailable": "To Door Available",
+      "status": "Status",
+      "createBy": "Create By",
+      "fromCountry": "From Country",
+      "toCountry": "To Country",
+      "fromState": "From State",
+      "toState": "To State",
+      "fromCity": "From City",
+      "toCity": "To City",
+      "availableItemTypes": "Available Item Types"
+    }
+  }
+}

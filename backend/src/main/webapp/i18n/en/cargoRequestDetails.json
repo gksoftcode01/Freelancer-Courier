@@ -1,0 +1,29 @@
+{
+  "freelancerCourierApp": {
+    "cargoRequestDetails": {
+      "home": {
+        "title": "Cargo Request Details",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Cargo Request Details",
+        "createOrEditLabel": "Create or edit a Cargo Request Details",
+        "notFound": "No Cargo Request Details found"
+      },
+      "created": "A new Cargo Request Details is created with identifier {{ param }}",
+      "updated": "A Cargo Request Details is updated with identifier {{ param }}",
+      "deleted": "A Cargo Request Details is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Cargo Request Details {{ id }}?"
+      },
+      "detail": {
+        "title": "Cargo Request Details"
+      },
+      "id": "ID",
+      "itemDesc": "Item Desc",
+      "itemWeight": "Item Weight",
+      "itemHeight": "Item Height",
+      "itemWidth": "Item Width",
+      "itemPhoto": "Item Photo",
+      "cargoRequest": "Cargo Request"
+    }
+  }
+}

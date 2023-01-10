@@ -1,0 +1,95 @@
+{
+  "applications": "*",
+  "changelogDate": "20230110175053",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "flight",
+  "fields": [
+    {
+      "fieldName": "flightDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "maxWeight",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "notes",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "budget",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "createDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "toDoorAvailable",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "FlightStatus",
+      "fieldValues": "Available,FullyBooked,Canceled"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Flight",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "appUser",
+      "relationshipName": "createBy",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "country",
+      "relationshipName": "fromCountry",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "country",
+      "relationshipName": "toCountry",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "stateProvince",
+      "relationshipName": "fromState",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "stateProvince",
+      "relationshipName": "toState",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "city",
+      "relationshipName": "fromCity",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "city",
+      "relationshipName": "toCity",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "itemTypes",
+      "otherEntityRelationshipName": "flight",
+      "ownerSide": true,
+      "relationshipName": "availableItemTypes",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}

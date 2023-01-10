@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity AppUser.
+    -->
+    <changeSet id="20230110175052-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="app_user"
+                                 constraintName="fk_app_user__user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="country_id"
+                                 baseTableName="app_user"
+                                 constraintName="fk_app_user__country_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="country"/>
+
+        <addForeignKeyConstraint baseColumnNames="state_province_id"
+                                 baseTableName="app_user"
+                                 constraintName="fk_app_user__state_province_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="state_province"/>
+
+        <addForeignKeyConstraint baseColumnNames="city_id"
+                                 baseTableName="app_user"
+                                 constraintName="fk_app_user__city_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="city"/>
+    </changeSet>
+</databaseChangeLog>

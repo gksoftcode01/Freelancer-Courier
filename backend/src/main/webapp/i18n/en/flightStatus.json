@@ -1,0 +1,10 @@
+{
+  "freelancerCourierApp": {
+    "FlightStatus": {
+      "null": "",
+      "Available": "Available",
+      "FullyBooked": "FullyBooked",
+      "Canceled": "Canceled"
+    }
+  }
+}

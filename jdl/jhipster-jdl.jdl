@@ -1,0 +1,142 @@
+
+entity StateProvince {
+	name String
+}
+entity Country {
+	name String
+}
+entity City {
+	name String
+}
+entity UserRate{
+	rate Long,
+	note String,
+   rateDate Instant,
+}
+
+entity ItemTypes {
+	name String required
+}
+enum  GenderType{
+	Male,
+    Femal,
+    Other
+}
+entity AppUser {
+    birthDate Instant,
+    gender GenderType,
+    registerDate Instant,
+    phoneNumber String,
+    mobileNumber String,
+}
+entity Flight {
+	flightDate Instant,
+ 	maxWeight Long,
+	notes String,
+	budget Long,
+	createDate Instant,
+    toDoorAvailable Boolean
+    status FlightStatus
+}
+entity CargoRequestStatus {
+		name String ,
+}
+entity CargoRequest {
+	budget Long,
+	isToDoor Boolean,
+	createDate Instant,
+    agreedPrice Long,
+}
+
+entity CargoRequestDetails {
+	itemDesc String,
+	itemWeight Long,
+  itemHeight Long,
+  itemWidth Long,
+	itemPhoto Blob
+}
+enum BidAskStatus{
+   Approve,
+   Reject
+}
+enum FlightStatus{
+   Available,
+   FullyBooked,
+   Canceled
+}
+entity Bid {
+	notes String,
+	price  Long,
+	status BidAskStatus
+}
+entity Ask {
+	notes String,
+	price  Long,
+	status BidAskStatus
+}
+
+
+relationship ManyToOne {
+   Flight{createBy} to AppUser,
+    Ask{toUser} to AppUser,
+     Bid{fromUser} to AppUser,
+  CargoRequest{status(name)} to CargoRequestStatus,
+  	CargoRequest{createBy} to AppUser,
+	CargoRequest{takenBy} to AppUser,
+    
+    Flight{fromCountry(name)} to Country,
+    Flight{toCountry(name)} to Country,        
+ Flight{fromState(name)} to StateProvince,
+  Flight{toState(name)} to StateProvince,
+ Flight{fromCity(name)} to City,
+  Flight{toCity(name)} to City,
+  
+  CargoRequest{fromCountry(name)} to Country,
+  CargoRequest{toCountry(name)} to Country,
+  CargoRequest{fromState(name)} to StateProvince,
+  CargoRequest{toState(name)} to StateProvince,
+  CargoRequest{fromCity(name)} to City,
+  CargoRequest{toCity(name)} to City,
+  
+}
+relationship ManyToMany {
+
+
+    Flight{availableItemTypes(name)} to ItemTypes{Flight},
+    
+
+    CargoRequest{reqItemTypes(name)} to ItemTypes{CargoRequest},
+    
+}
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+    CargoRequest to CargoRequestDetails{CargoRequest},
+    AppUser to UserRate{appUser},
+     Country to AppUser{Country(name)},
+         StateProvince to AppUser{StateProvince(name)},
+             City to AppUser{City(name)},
+      CargoRequest{ask} to Ask{CargoRequest},
+         CargoRequest{bid} to Bid{CargoRequest},
+         
+  
+}
+
+ 
+relationship OneToOne {
+UserRate to CargoRequest,
+
+AppUser{user} to User
+}
+
+// Set pagination options
+paginate all with infinite-scroll
+
+// Use Data Transfer Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceClass 
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

@@ -1,0 +1,9 @@
+{
+  "freelancerCourierApp": {
+    "BidAskStatus": {
+      "null": "",
+      "Approve": "Approve",
+      "Reject": "Reject"
+    }
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "applications": "*",
+  "changelogDate": "20230110175055",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "cargo_request",
+  "fields": [
+    {
+      "fieldName": "budget",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "isToDoor",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "createDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "agreedPrice",
+      "fieldType": "Long"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "CargoRequest",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "cargoRequestDetails",
+      "otherEntityRelationshipName": "cargoRequest",
+      "relationshipName": "cargoRequestDetails",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "ask",
+      "otherEntityRelationshipName": "cargoRequest",
+      "relationshipName": "ask",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "bid",
+      "otherEntityRelationshipName": "cargoRequest",
+      "relationshipName": "bid",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "cargoRequestStatus",
+      "relationshipName": "status",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "appUser",
+      "relationshipName": "createBy",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "appUser",
+      "relationshipName": "takenBy",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "country",
+      "relationshipName": "fromCountry",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "country",
+      "relationshipName": "toCountry",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "stateProvince",
+      "relationshipName": "fromState",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "stateProvince",
+      "relationshipName": "toState",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "city",
+      "relationshipName": "fromCity",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "city",
+      "relationshipName": "toCity",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "itemTypes",
+      "otherEntityRelationshipName": "cargoRequest",
+      "ownerSide": true,
+      "relationshipName": "reqItemTypes",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "userRate",
+      "otherEntityRelationshipName": "cargoRequest",
+      "ownerSide": false,
+      "relationshipName": "userRate",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

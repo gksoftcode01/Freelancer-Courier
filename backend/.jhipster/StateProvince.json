@@ -1,0 +1,27 @@
+{
+  "applications": "*",
+  "changelogDate": "20230110175047",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "state_province",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "StateProvince",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "appUser",
+      "otherEntityRelationshipName": "stateProvince",
+      "relationshipName": "appUser",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}

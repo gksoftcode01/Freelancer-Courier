@@ -1,0 +1,27 @@
+{
+  "applications": "*",
+  "changelogDate": "20230110175049",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "city",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "City",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "appUser",
+      "otherEntityRelationshipName": "country",
+      "relationshipName": "appUser",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}

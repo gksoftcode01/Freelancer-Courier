@@ -1,0 +1,28 @@
+{
+  "freelancerCourierApp": {
+    "ask": {
+      "home": {
+        "title": "Asks",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Ask",
+        "createOrEditLabel": "Create or edit a Ask",
+        "notFound": "No Asks found"
+      },
+      "created": "A new Ask is created with identifier {{ param }}",
+      "updated": "A Ask is updated with identifier {{ param }}",
+      "deleted": "A Ask is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Ask {{ id }}?"
+      },
+      "detail": {
+        "title": "Ask"
+      },
+      "id": "ID",
+      "notes": "Notes",
+      "price": "Price",
+      "status": "Status",
+      "toUser": "To User",
+      "cargoRequest": "Cargo Request"
+    }
+  }
+}

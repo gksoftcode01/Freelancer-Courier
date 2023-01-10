@@ -1,0 +1,24 @@
+{
+  "freelancerCourierApp": {
+    "cargoRequestStatus": {
+      "home": {
+        "title": "Cargo Request Statuses",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Cargo Request Status",
+        "createOrEditLabel": "Create or edit a Cargo Request Status",
+        "notFound": "No Cargo Request Statuses found"
+      },
+      "created": "A new Cargo Request Status is created with identifier {{ param }}",
+      "updated": "A Cargo Request Status is updated with identifier {{ param }}",
+      "deleted": "A Cargo Request Status is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Cargo Request Status {{ id }}?"
+      },
+      "detail": {
+        "title": "Cargo Request Status"
+      },
+      "id": "ID",
+      "name": "Name"
+    }
+  }
+}

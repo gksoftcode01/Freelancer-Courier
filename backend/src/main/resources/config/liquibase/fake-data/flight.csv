@@ -1,0 +1,11 @@
+id;flight_date;max_weight;notes;budget;create_date;to_door_available;status
+1;2023-01-10T12:55:16;45223;drive;42300;2023-01-10T04:30:15;true;Canceled
+2;2023-01-10T09:11:10;85083;Account functionalities Wooden;20742;2023-01-10T16:31:39;true;Canceled
+3;2023-01-10T08:55:06;15911;neural-net;51677;2023-01-10T06:04:16;true;Canceled
+4;2023-01-09T18:36:32;43661;Associate virtual;93399;2023-01-10T01:25:55;true;Available
+5;2023-01-10T17:08:49;70541;calculating maximize;38391;2023-01-10T10:19:04;false;FullyBooked
+6;2023-01-10T06:30:51;61141;Soft installation sensor;844;2023-01-10T09:04:19;true;Canceled
+7;2023-01-10T05:02:04;74610;Communications Loan;97005;2023-01-09T22:46:44;true;FullyBooked
+8;2023-01-09T22:18:14;39308;Expressway;13972;2023-01-09T21:28:44;true;FullyBooked
+9;2023-01-10T12:08:46;20473;Rustic;30634;2023-01-10T11:42:00;false;FullyBooked
+10;2023-01-10T02:58:37;90650;incremental;59353;2023-01-09T19:04:24;true;FullyBooked

@@ -1,0 +1,42 @@
+{
+  "applications": "*",
+  "changelogDate": "20230110175050",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "user_rate",
+  "fields": [
+    {
+      "fieldName": "rate",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "note",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "rateDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "UserRate",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "cargoRequest",
+      "otherEntityRelationshipName": "userRate",
+      "ownerSide": true,
+      "relationshipName": "cargoRequest",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "appUser",
+      "otherEntityRelationshipName": "userRate",
+      "relationshipName": "appUser",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

@@ -1,0 +1,41 @@
+{
+  "applications": "*",
+  "changelogDate": "20230110175058",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "ask",
+  "fields": [
+    {
+      "fieldName": "notes",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "price",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "BidAskStatus",
+      "fieldValues": "Approve,Reject"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Ask",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "appUser",
+      "relationshipName": "toUser",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "cargoRequest",
+      "otherEntityRelationshipName": "ask",
+      "relationshipName": "cargoRequest",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

@@ -1,0 +1,20 @@
+{
+  "applications": "*",
+  "changelogDate": "20230110175054",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "cargo_request_status",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "CargoRequestStatus",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceClass"
+}

@@ -1,0 +1,10 @@
+{
+  "freelancerCourierApp": {
+    "GenderType": {
+      "null": "",
+      "Male": "Male",
+      "Femal": "Femal",
+      "Other": "Other"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "applications": "*",
+  "changelogDate": "20230110175051",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "item_types",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "ItemTypes",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "flight",
+      "otherEntityRelationshipName": "availableItemTypes",
+      "ownerSide": false,
+      "relationshipName": "flight",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "cargoRequest",
+      "otherEntityRelationshipName": "reqItemTypes",
+      "ownerSide": false,
+      "relationshipName": "cargoRequest",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}

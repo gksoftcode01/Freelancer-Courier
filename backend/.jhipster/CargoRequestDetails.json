@@ -1,0 +1,44 @@
+{
+  "applications": "*",
+  "changelogDate": "20230110175056",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "cargo_request_details",
+  "fields": [
+    {
+      "fieldName": "itemDesc",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "itemWeight",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "itemHeight",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "itemWidth",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "itemPhoto",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "CargoRequestDetails",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "cargoRequest",
+      "otherEntityRelationshipName": "cargoRequestDetails",
+      "relationshipName": "cargoRequest",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}
