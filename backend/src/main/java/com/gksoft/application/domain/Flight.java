@@ -50,7 +50,7 @@ public class Flight implements Serializable {
     private FlightStatus status;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "user", "userRates", "country", "stateProvince", "country" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "userRates", "country", "stateProvince", "country" }, allowSetters = true)
     private AppUser createBy;
 
     @ManyToOne
@@ -83,8 +83,7 @@ public class Flight implements Serializable {
         joinColumns = @JoinColumn(name = "flight_id"),
         inverseJoinColumns = @JoinColumn(name = "available_item_types_id")
     )
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "flights", "cargoRequests" }, allowSetters = true)
+     @JsonIgnoreProperties(value = { "flights", "cargoRequests" }, allowSetters = true)
     private Set<ItemTypes> availableItemTypes = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

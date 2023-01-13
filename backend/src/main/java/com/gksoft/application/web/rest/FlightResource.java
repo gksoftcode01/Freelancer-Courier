@@ -144,7 +144,7 @@ public class FlightResource {
     @GetMapping("/flights")
     public ResponseEntity<List<Flight>> getAllFlights(
         @org.springdoc.api.annotations.ParameterObject Pageable pageable,
-        @RequestParam(required = false, defaultValue = "false") boolean eagerload
+        @RequestParam(required = false, defaultValue = "true") boolean eagerload
     ) {
         log.debug("REST request to get a page of Flights");
         Page<Flight> page;
