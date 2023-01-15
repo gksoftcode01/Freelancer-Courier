@@ -14,7 +14,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  */
 @Entity
 @Table(name = "cargo_request")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class CargoRequest implements Serializable {
 
@@ -38,18 +37,15 @@ public class CargoRequest implements Serializable {
     @Column(name = "agreed_price")
     private Long agreedPrice;
 
-    @OneToMany(mappedBy = "cargoRequest")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "cargoRequest" }, allowSetters = true)
+    @OneToMany(mappedBy = "cargoRequest",fetch = FetchType.EAGER)
+     @JsonIgnoreProperties(value = { "cargoRequest" }, allowSetters = true)
     private Set<CargoRequestDetails> cargoRequestDetails = new HashSet<>();
 
     @OneToMany(mappedBy = "cargoRequest")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "toUser", "cargoRequest" }, allowSetters = true)
     private Set<Ask> asks = new HashSet<>();
 
     @OneToMany(mappedBy = "cargoRequest")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "fromUser", "cargoRequest" }, allowSetters = true)
     private Set<Bid> bids = new HashSet<>();
 
@@ -57,7 +53,7 @@ public class CargoRequest implements Serializable {
     private CargoRequestStatus status;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "user", "userRates", "country", "stateProvince", "country" }, allowSetters = true)
+    @JsonIgnoreProperties(value = {   "userRates", "country", "stateProvince", "country" }, allowSetters = true)
     private AppUser createBy;
 
     @ManyToOne

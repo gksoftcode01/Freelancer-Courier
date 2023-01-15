@@ -149,7 +149,7 @@ public class CargoRequestResource {
     public ResponseEntity<List<CargoRequest>> getAllCargoRequests(
         @org.springdoc.api.annotations.ParameterObject Pageable pageable,
         @RequestParam(required = false) String filter,
-        @RequestParam(required = false, defaultValue = "false") boolean eagerload
+        @RequestParam(required = false, defaultValue = "true") boolean eagerload
     ) {
         if ("userrate-is-null".equals(filter)) {
             log.debug("REST request to get all CargoRequests where userRate is null");
