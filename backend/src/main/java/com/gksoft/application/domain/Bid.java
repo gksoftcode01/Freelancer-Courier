@@ -3,6 +3,7 @@ package com.gksoft.application.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.gksoft.application.domain.enumeration.BidAskStatus;
 import java.io.Serializable;
+import java.time.Instant;
 import javax.persistence.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -12,8 +13,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  */
 @Entity
 @Table(name = "bid")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@SuppressWarnings("common-java:DuplicatedBlocks")
+ @SuppressWarnings("common-java:DuplicatedBlocks")
 public class Bid implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -35,7 +35,7 @@ public class Bid implements Serializable {
     private BidAskStatus status;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "user", "userRates", "country", "stateProvince", "country" }, allowSetters = true)
+    @JsonIgnoreProperties(value = {   "country", "stateProvince", "country" }, allowSetters = true)
     private AppUser fromUser;
 
     @ManyToOne
@@ -60,8 +60,24 @@ public class Bid implements Serializable {
     )
     private CargoRequest cargoRequest;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here
+    @Column(name = "create_date")
+    private Instant createDate;
 
+
+
+    // jhipster-needle-entity-add-field - JHipster will add fields here
+    public Instant getCreateDate() {
+        return this.createDate;
+    }
+
+    public Bid createDate(Instant createDate) {
+        this.setCreateDate(createDate);
+        return this;
+    }
+
+    public void setCreateDate(Instant createDate) {
+        this.createDate = createDate;
+    }
     public Long getId() {
         return this.id;
     }

@@ -37,6 +37,12 @@ public class CargoRequest implements Serializable {
     @Column(name = "agreed_price")
     private Long agreedPrice;
 
+    @Column(name = "weight")
+    private Long weight;
+
+    @Column(name = "package_description")
+    private Long packageDesc;
+
     @OneToMany(mappedBy = "cargoRequest",fetch = FetchType.EAGER)
      @JsonIgnoreProperties(value = { "cargoRequest" }, allowSetters = true)
     private Set<CargoRequestDetails> cargoRequestDetails = new HashSet<>();
@@ -45,8 +51,8 @@ public class CargoRequest implements Serializable {
     @JsonIgnoreProperties(value = { "toUser", "cargoRequest" }, allowSetters = true)
     private Set<Ask> asks = new HashSet<>();
 
-    @OneToMany(mappedBy = "cargoRequest")
-    @JsonIgnoreProperties(value = { "fromUser", "cargoRequest" }, allowSetters = true)
+    @OneToMany(mappedBy = "cargoRequest",fetch = FetchType.EAGER)
+    @JsonIgnoreProperties(value = { "cargoRequest" }, allowSetters = true)
     private Set<Bid> bids = new HashSet<>();
 
     @ManyToOne
@@ -57,7 +63,7 @@ public class CargoRequest implements Serializable {
     private AppUser createBy;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "user", "userRates", "country", "stateProvince", "country" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "userRates", "country", "stateProvince", "country" }, allowSetters = true)
     private AppUser takenBy;
 
     @ManyToOne
@@ -419,7 +425,14 @@ public class CargoRequest implements Serializable {
         return this;
     }
 
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+    public Long getPackageDesc() {
+        return packageDesc;
+    }
+
+    public void setPackageDesc(Long packageDesc) {
+        this.packageDesc = packageDesc;
+    }
+// jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
