@@ -31,8 +31,8 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class UserRateResourceIT {
 
-    private static final Long DEFAULT_RATE = 1L;
-    private static final Long UPDATED_RATE = 2L;
+    private static final Float DEFAULT_RATE = 1F;
+    private static final Float UPDATED_RATE = 2F;
 
     private static final String DEFAULT_NOTE = "AAAAAAAAAA";
     private static final String UPDATED_NOTE = "BBBBBBBBBB";

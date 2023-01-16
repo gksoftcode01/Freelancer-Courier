@@ -34,8 +34,8 @@ public class Ask implements Serializable {
     private BidAskStatus status;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "user", "userRates", "country", "stateProvince", "country" }, allowSetters = true)
-    private AppUser toUser;
+    @JsonIgnoreProperties(value = {  "userRates", "country", "stateProvince", "city" }, allowSetters = true)
+    private User toUser;
 
     @ManyToOne
     @JsonIgnoreProperties(
@@ -113,15 +113,15 @@ public class Ask implements Serializable {
         this.status = status;
     }
 
-    public AppUser getToUser() {
+    public  User getToUser() {
         return this.toUser;
     }
 
-    public void setToUser(AppUser appUser) {
+    public void setToUser( User appUser) {
         this.toUser = appUser;
     }
 
-    public Ask toUser(AppUser appUser) {
+    public Ask toUser( User appUser) {
         this.setToUser(appUser);
         return this;
     }

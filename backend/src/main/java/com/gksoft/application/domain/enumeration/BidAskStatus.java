@@ -6,4 +6,5 @@ package com.gksoft.application.domain.enumeration;
 public enum BidAskStatus {
     Approve,
     Reject,
+    New,
 }

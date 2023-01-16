@@ -50,31 +50,31 @@ public class Flight implements Serializable {
     private FlightStatus status;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "userRates", "country", "stateProvince", "country" }, allowSetters = true)
-    private AppUser createBy;
+    @JsonIgnoreProperties(value = { "userRates", "country", "stateProvince", "city" }, allowSetters = true)
+    private User createBy;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "appUsers" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "Users" }, allowSetters = true)
     private Country fromCountry;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "appUsers" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "Users" }, allowSetters = true)
     private Country toCountry;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "appUsers" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "Users" }, allowSetters = true)
     private StateProvince fromState;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "appUsers" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "Users" }, allowSetters = true)
     private StateProvince toState;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "appUsers" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "Users" }, allowSetters = true)
     private City fromCity;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "appUsers" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "Users" }, allowSetters = true)
     private City toCity;
 
     @ManyToMany
@@ -192,16 +192,16 @@ public class Flight implements Serializable {
         this.status = status;
     }
 
-    public AppUser getCreateBy() {
+    public User getCreateBy() {
         return this.createBy;
     }
 
-    public void setCreateBy(AppUser appUser) {
-        this.createBy = appUser;
+    public void setCreateBy(User User) {
+        this.createBy = User;
     }
 
-    public Flight createBy(AppUser appUser) {
-        this.setCreateBy(appUser);
+    public Flight createBy(User User) {
+        this.setCreateBy(User);
         return this;
     }
 

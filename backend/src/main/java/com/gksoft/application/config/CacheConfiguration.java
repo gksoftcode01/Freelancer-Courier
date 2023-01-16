@@ -58,9 +58,7 @@ public class CacheConfiguration {
             createCache(cm, com.gksoft.application.domain.ItemTypes.class.getName());
             createCache(cm, com.gksoft.application.domain.ItemTypes.class.getName() + ".flights");
             createCache(cm, com.gksoft.application.domain.ItemTypes.class.getName() + ".cargoRequests");
-            createCache(cm, com.gksoft.application.domain.AppUser.class.getName());
-            createCache(cm, com.gksoft.application.domain.AppUser.class.getName() + ".userRates");
-            createCache(cm, com.gksoft.application.domain.Flight.class.getName());
+             createCache(cm, com.gksoft.application.domain.Flight.class.getName());
             createCache(cm, com.gksoft.application.domain.Flight.class.getName() + ".availableItemTypes");
             createCache(cm, com.gksoft.application.domain.CargoRequestStatus.class.getName());
             createCache(cm, com.gksoft.application.domain.CargoRequest.class.getName());

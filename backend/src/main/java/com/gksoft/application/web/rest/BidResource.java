@@ -6,6 +6,7 @@ import com.gksoft.application.service.BidService;
 import com.gksoft.application.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.Instant;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -59,6 +60,7 @@ public class BidResource {
         if (bid.getId() != null) {
             throw new BadRequestAlertException("A new bid cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        bid.setCreateDate(Instant.now());
         Bid result = bidService.save(bid);
         return ResponseEntity
             .created(new URI("/api/bids/" + result.getId()))

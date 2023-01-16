@@ -1,6 +1,7 @@
 package com.gksoft.application.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.gksoft.application.config.Constants;
 import java.io.Serializable;
 import java.time.Instant;
@@ -12,6 +13,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
+import com.gksoft.application.domain.enumeration.GenderType;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Cache;
@@ -82,6 +85,22 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
     @Column(name = "reset_date")
     private Instant resetDate = null;
 
+    @Column(name = "birth_date")
+    private Instant birthDate;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "gender")
+    private GenderType gender;
+
+    @Column(name = "register_date")
+    private Instant registerDate;
+
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
+    @Column(name = "mobile_number")
+    private String mobileNumber;
+
     @JsonIgnore
     @ManyToMany
     @JoinTable(
@@ -89,9 +108,97 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
         joinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "id") },
         inverseJoinColumns = { @JoinColumn(name = "authority_name", referencedColumnName = "name") }
     )
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @BatchSize(size = 20)
+     @BatchSize(size = 20)
     private Set<Authority> authorities = new HashSet<>();
+
+    @OneToMany(mappedBy = "user")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "cargoRequest", "user" }, allowSetters = true)
+    private Set<UserRate> userRates = new HashSet<>();
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = { "users" }, allowSetters = true)
+    private Country country;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = { "users" }, allowSetters = true)
+    private StateProvince stateProvince;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = { "users" }, allowSetters = true)
+    private City city;
+
+    public Set<UserRate> getUserRates() {
+        return userRates;
+    }
+
+    public void setUserRates(Set<UserRate> userRates) {
+        this.userRates = userRates;
+    }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
+
+    public StateProvince getStateProvince() {
+        return stateProvince;
+    }
+
+    public void setStateProvince(StateProvince stateProvince) {
+        this.stateProvince = stateProvince;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
+    public Instant getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Instant birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public GenderType getGender() {
+        return gender;
+    }
+
+    public void setGender(GenderType gender) {
+        this.gender = gender;
+    }
+
+    public Instant getRegisterDate() {
+        return registerDate;
+    }
+
+    public void setRegisterDate(Instant registerDate) {
+        this.registerDate = registerDate;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getMobileNumber() {
+        return mobileNumber;
+    }
+
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
+    }
 
     public Long getId() {
         return id;

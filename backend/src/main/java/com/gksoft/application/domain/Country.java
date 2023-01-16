@@ -30,8 +30,8 @@ public class Country implements Serializable {
 
     @OneToMany(mappedBy = "country")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "user", "userRates", "country", "stateProvince", "country" }, allowSetters = true)
-    private Set<AppUser> appUsers = new HashSet<>();
+    @JsonIgnoreProperties(value = {  "userRates", "country", "stateProvince", "country" }, allowSetters = true)
+    private Set<User> users = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -61,34 +61,34 @@ public class Country implements Serializable {
         this.name = name;
     }
 
-    public Set<AppUser> getAppUsers() {
-        return this.appUsers;
+    public Set<User> getUsers() {
+        return this.users;
     }
 
-    public void setAppUsers(Set<AppUser> appUsers) {
-        if (this.appUsers != null) {
-            this.appUsers.forEach(i -> i.setCountry(null));
+    public void setUsers(Set<User> Users) {
+        if (this.users != null) {
+            this.users.forEach(i -> i.setCountry(null));
         }
-        if (appUsers != null) {
-            appUsers.forEach(i -> i.setCountry(this));
+        if (Users != null) {
+            Users.forEach(i -> i.setCountry(this));
         }
-        this.appUsers = appUsers;
+        this.users = Users;
     }
 
-    public Country appUsers(Set<AppUser> appUsers) {
-        this.setAppUsers(appUsers);
+    public Country users(Set<User> users) {
+        this.setUsers(users);
         return this;
     }
 
-    public Country addAppUser(AppUser appUser) {
-        this.appUsers.add(appUser);
-        appUser.setCountry(this);
+    public Country addAppUser(User user) {
+        this.users.add(user);
+        user.setCountry(this);
         return this;
     }
 
-    public Country removeAppUser(AppUser appUser) {
-        this.appUsers.remove(appUser);
-        appUser.setCountry(null);
+    public Country removeAppUser(User users) {
+        this.users.remove(users);
+        users.setCountry(null);
         return this;
     }
 

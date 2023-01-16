@@ -28,10 +28,10 @@ public class City implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "country")
+    @OneToMany(mappedBy = "city")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "user", "userRates", "country", "stateProvince", "country" }, allowSetters = true)
-    private Set<AppUser> appUsers = new HashSet<>();
+    @JsonIgnoreProperties(value = {   "userRates", "country", "stateProvince", "city" }, allowSetters = true)
+    private Set<User> users = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -61,34 +61,34 @@ public class City implements Serializable {
         this.name = name;
     }
 
-    public Set<AppUser> getAppUsers() {
-        return this.appUsers;
+    public Set<User> getUsers() {
+        return this.users;
     }
 
-    public void setAppUsers(Set<AppUser> appUsers) {
-        if (this.appUsers != null) {
-            this.appUsers.forEach(i -> i.setCity(null));
+    public void setUsers(Set<User> Users) {
+        if (this.users != null) {
+            this.users.forEach(i -> i.setCity(null));
         }
-        if (appUsers != null) {
-            appUsers.forEach(i -> i.setCity(this));
+        if (Users != null) {
+            Users.forEach(i -> i.setCity(this));
         }
-        this.appUsers = appUsers;
+        this.users = Users;
     }
 
-    public City appUsers(Set<AppUser> appUsers) {
-        this.setAppUsers(appUsers);
+    public City Users(Set<User> Users) {
+        this.setUsers(Users);
         return this;
     }
 
-    public City addAppUser(AppUser appUser) {
-        this.appUsers.add(appUser);
-        appUser.setCity(this);
+    public City addUser(User users) {
+        this.users.add(users);
+        users.setCity(this);
         return this;
     }
 
-    public City removeAppUser(AppUser appUser) {
-        this.appUsers.remove(appUser);
-        appUser.setCity(null);
+    public City removeAppUser(User users) {
+        this.users.remove(users);
+        users.setCity(null);
         return this;
     }
 

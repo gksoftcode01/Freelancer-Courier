@@ -25,7 +25,7 @@ public class UserRate implements Serializable {
     private Long id;
 
     @Column(name = "rate")
-    private Long rate;
+    private Float rate;
 
     @Column(name = "note")
     private String note;
@@ -57,10 +57,24 @@ public class UserRate implements Serializable {
     private CargoRequest cargoRequest;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "user", "userRates", "country", "stateProvince", "country" }, allowSetters = true)
-    private AppUser appUser;
+    @JsonIgnoreProperties(value = {   "userRates", "country", "stateProvince", "city" }, allowSetters = true)
+    private User user;
 
+    @Column(name = "is_courier")
+    private int isCourier;
     // jhipster-needle-entity-add-field - JHipster will add fields here
+
+    public User getUser() {
+        return user;
+    }
+
+    public int getIsCourier() {
+        return isCourier;
+    }
+
+    public void setIsCourier(int isCourier) {
+        this.isCourier = isCourier;
+    }
 
     public Long getId() {
         return this.id;
@@ -75,16 +89,16 @@ public class UserRate implements Serializable {
         this.id = id;
     }
 
-    public Long getRate() {
+    public Float getRate() {
         return this.rate;
     }
 
-    public UserRate rate(Long rate) {
+    public UserRate rate(Float rate) {
         this.setRate(rate);
         return this;
     }
 
-    public void setRate(Long rate) {
+    public void setRate(Float rate) {
         this.rate = rate;
     }
 
@@ -127,17 +141,15 @@ public class UserRate implements Serializable {
         return this;
     }
 
-    public AppUser getAppUser() {
-        return this.appUser;
-    }
 
-    public void setAppUser(AppUser appUser) {
-        this.appUser = appUser;
-    }
 
-    public UserRate appUser(AppUser appUser) {
-        this.setAppUser(appUser);
+    public UserRate  User(User user) {
+        this.setUser(user);
         return this;
+    }
+
+    private void setUser(User user) {
+        this.user = user;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

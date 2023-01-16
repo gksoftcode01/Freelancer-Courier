@@ -60,34 +60,34 @@ public class CargoRequest implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties(value = {   "userRates", "country", "stateProvince", "country" }, allowSetters = true)
-    private AppUser createBy;
+    private User createBy;
 
     @ManyToOne
     @JsonIgnoreProperties(value = { "userRates", "country", "stateProvince", "country" }, allowSetters = true)
-    private AppUser takenBy;
+    private User takenBy;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "appUsers" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "Users" }, allowSetters = true)
     private Country fromCountry;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "appUsers" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "Users" }, allowSetters = true)
     private Country toCountry;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "appUsers" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "Users" }, allowSetters = true)
     private StateProvince fromState;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "appUsers" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "Users" }, allowSetters = true)
     private StateProvince toState;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "appUsers" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "Users" }, allowSetters = true)
     private City fromCity;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "appUsers" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "Users" }, allowSetters = true)
     private City toCity;
 
     @ManyToMany
@@ -100,7 +100,7 @@ public class CargoRequest implements Serializable {
     @JsonIgnoreProperties(value = { "flights", "cargoRequests" }, allowSetters = true)
     private Set<ItemTypes> reqItemTypes = new HashSet<>();
 
-    @JsonIgnoreProperties(value = { "cargoRequest", "appUser" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "cargoRequest", "User" }, allowSetters = true)
     @OneToOne(mappedBy = "cargoRequest")
     private UserRate userRate;
 
@@ -277,28 +277,28 @@ public class CargoRequest implements Serializable {
         return this;
     }
 
-    public AppUser getCreateBy() {
+    public User getCreateBy() {
         return this.createBy;
     }
 
-    public void setCreateBy(AppUser appUser) {
-        this.createBy = appUser;
+    public void setCreateBy(User User) {
+        this.createBy = User;
     }
 
-    public CargoRequest createBy(AppUser appUser) {
-        this.setCreateBy(appUser);
+    public CargoRequest createBy(User User) {
+        this.setCreateBy(User);
         return this;
     }
 
-    public AppUser getTakenBy() {
+    public User getTakenBy() {
         return this.takenBy;
     }
 
-    public void setTakenBy(AppUser appUser) {
-        this.takenBy = appUser;
+    public void setTakenBy(User User) {
+        this.takenBy = User;
     }
 
-    public CargoRequest takenBy(AppUser appUser) {
+    public CargoRequest takenBy(User appUser) {
         this.setTakenBy(appUser);
         return this;
     }
