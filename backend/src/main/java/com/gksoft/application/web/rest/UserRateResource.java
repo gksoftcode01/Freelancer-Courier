@@ -143,9 +143,13 @@ public class UserRateResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of userRates in body.
      */
     @GetMapping("/user-rates")
-    public ResponseEntity<List<UserRate>> getAllUserRates(@org.springdoc.api.annotations.ParameterObject Pageable pageable) {
+    public ResponseEntity<List<UserRate>> getAllUserRates(@org.springdoc.api.annotations.ParameterObject
+                                                              Pageable pageable,
+                                                          @RequestParam(name = "cargoId",required = false) Long cargoId,
+                                                          @RequestParam(name = "userId",required = false) Long userId ,
+                                                          @RequestParam(name = "isCourier",required = false) Long isCourier) {
         log.debug("REST request to get a page of UserRates");
-        Page<UserRate> page = userRateService.findAll(pageable);
+        Page<UserRate> page = userRateService.findAll(pageable,cargoId,userId,isCourier);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
@@ -153,15 +157,25 @@ public class UserRateResource {
     /**
      * {@code GET  /user-rates/:id} : get the "id" userRate.
      *
-     * @param id the id of the userRate to retrieve.
+     * @param id the id of the   to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the userRate, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/user-rates/{id}")
-    public ResponseEntity<UserRate> getUserRate(@PathVariable Long id) {
-        log.debug("REST request to get UserRate : {}", id);
+    public ResponseEntity<UserRate> getUserRate(@PathVariable Long id ) {
+        log.debug("REST request to get UserRate cargoId : {}", id);
         Optional<UserRate> userRate = userRateService.findOne(id);
         return ResponseUtil.wrapOrNotFound(userRate);
     }
+
+
+    @GetMapping("/user-rates-cargo/{id}")
+    public ResponseEntity<List<UserRate>> getUserRateByCargo(@PathVariable Long cargoId ) {
+        log.debug("REST request to get UserRate cargoId : {}", cargoId);
+        List<UserRate> userRate = userRateService.findByCargoRequest(cargoId);
+        return ResponseEntity.ok(userRate);
+    }
+
+
 
     /**
      * {@code DELETE  /user-rates/:id} : delete the "id" userRate.

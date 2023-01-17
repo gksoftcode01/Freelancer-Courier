@@ -110,7 +110,7 @@ public class CargoRequestService {
         log.debug("Request to get all cargoRequests where UserRate is null");
         return StreamSupport
             .stream(cargoRequestRepository.findAll().spliterator(), false)
-            .filter(cargoRequest -> cargoRequest.getUserRate() == null)
+            .filter(cargoRequest -> cargoRequest.getUsersRates() == null)
             .collect(Collectors.toList());
     }
 

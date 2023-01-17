@@ -2,6 +2,8 @@ package com.gksoft.application.service;
 
 import com.gksoft.application.domain.UserRate;
 import com.gksoft.application.repository.UserRateRepository;
+
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -81,10 +83,17 @@ public class UserRateService {
      * @return the list of entities.
      */
     @Transactional(readOnly = true)
-    public Page<UserRate> findAll(Pageable pageable) {
+    public Page<UserRate> findAll(Pageable pageable,Long cargoId,Long userId,Long isCourier) {
         log.debug("Request to get all UserRates");
-        return userRateRepository.findAll(pageable);
+        return userRateRepository.srchRates( cargoId, userId, isCourier , pageable);
     }
+
+    @Transactional(readOnly = true)
+    public List<UserRate> findByCargoRequest(Long cargoRequestId) {
+        log.debug("Request to get all UserRates");
+        return userRateRepository.findByCargoRequestId(cargoRequestId);
+    }
+
 
     /**
      * Get one userRate by id.

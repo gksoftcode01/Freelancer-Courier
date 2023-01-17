@@ -14,7 +14,7 @@
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="rate" type="bigint">
+            <column name="rate" type="float">
                 <constraints nullable="true" />
             </column>
             <column name="note" type="varchar(255)">
@@ -24,9 +24,12 @@
                 <constraints nullable="true" />
             </column>
             <column name="cargo_request_id" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_user_rate__cargo_request_id" />
+                <constraints nullable="true"  />
             </column>
             <column name="app_user_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="is_courier" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->

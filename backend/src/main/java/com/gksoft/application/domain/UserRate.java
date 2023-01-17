@@ -12,8 +12,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  */
 @Entity
 @Table(name = "user_rate")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@SuppressWarnings("common-java:DuplicatedBlocks")
+ @SuppressWarnings("common-java:DuplicatedBlocks")
 public class UserRate implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -52,8 +51,7 @@ public class UserRate implements Serializable {
         },
         allowSetters = true
     )
-    @OneToOne
-    @JoinColumn(unique = true)
+    @ManyToOne
     private CargoRequest cargoRequest;
 
     @ManyToOne

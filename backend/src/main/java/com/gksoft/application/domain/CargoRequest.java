@@ -100,9 +100,11 @@ public class CargoRequest implements Serializable {
     @JsonIgnoreProperties(value = { "flights", "cargoRequests" }, allowSetters = true)
     private Set<ItemTypes> reqItemTypes = new HashSet<>();
 
-    @JsonIgnoreProperties(value = { "cargoRequest", "User" }, allowSetters = true)
-    @OneToOne(mappedBy = "cargoRequest")
-    private UserRate userRate;
+
+    @OneToMany(mappedBy = "cargoRequest")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "cargoRequest", "user" }, allowSetters = true)
+    private Set<UserRate> userRates = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -264,6 +266,40 @@ public class CargoRequest implements Serializable {
         return this;
     }
 
+
+    public Set<UserRate> getUsersRates() {
+        return this.userRates;
+    }
+
+    public void setUserRates(Set<UserRate> userRates) {
+        if (this.userRates != null) {
+            this.userRates.forEach(i -> i.setCargoRequest(null));
+        }
+        if (userRates != null) {
+            userRates.forEach(i -> i.setCargoRequest(this));
+        }
+        this.userRates = userRates;
+    }
+
+    public CargoRequest UserRates(Set<UserRate> userRates) {
+        this.setUserRates(userRates);
+        return this;
+    }
+
+    public CargoRequest addUserRate(UserRate userRate) {
+        this.userRates.add(userRate);
+        userRate.setCargoRequest(this);
+        return this;
+    }
+
+    public CargoRequest removeUserRate(UserRate  userRate) {
+        this.userRates.remove(userRate);
+        userRate.setCargoRequest(null);
+        return this;
+    }
+
+
+
     public CargoRequestStatus getStatus() {
         return this.status;
     }
@@ -406,24 +442,9 @@ public class CargoRequest implements Serializable {
         return this;
     }
 
-    public UserRate getUserRate() {
-        return this.userRate;
-    }
 
-    public void setUserRate(UserRate userRate) {
-        if (this.userRate != null) {
-            this.userRate.setCargoRequest(null);
-        }
-        if (userRate != null) {
-            userRate.setCargoRequest(this);
-        }
-        this.userRate = userRate;
-    }
 
-    public CargoRequest userRate(UserRate userRate) {
-        this.setUserRate(userRate);
-        return this;
-    }
+
 
     public Long getPackageDesc() {
         return packageDesc;
