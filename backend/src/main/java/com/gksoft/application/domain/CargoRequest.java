@@ -47,10 +47,6 @@ public class CargoRequest implements Serializable {
      @JsonIgnoreProperties(value = { "cargoRequest" }, allowSetters = true)
     private Set<CargoRequestDetails> cargoRequestDetails = new HashSet<>();
 
-    @OneToMany(mappedBy = "cargoRequest")
-    @JsonIgnoreProperties(value = { "toUser", "cargoRequest" }, allowSetters = true)
-    private Set<Ask> asks = new HashSet<>();
-
     @OneToMany(mappedBy = "cargoRequest",fetch = FetchType.EAGER)
     @JsonIgnoreProperties(value = { "cargoRequest" }, allowSetters = true)
     private Set<Bid> bids = new HashSet<>();
@@ -204,36 +200,6 @@ public class CargoRequest implements Serializable {
         return this;
     }
 
-    public Set<Ask> getAsks() {
-        return this.asks;
-    }
-
-    public void setAsks(Set<Ask> asks) {
-        if (this.asks != null) {
-            this.asks.forEach(i -> i.setCargoRequest(null));
-        }
-        if (asks != null) {
-            asks.forEach(i -> i.setCargoRequest(this));
-        }
-        this.asks = asks;
-    }
-
-    public CargoRequest asks(Set<Ask> asks) {
-        this.setAsks(asks);
-        return this;
-    }
-
-    public CargoRequest addAsk(Ask ask) {
-        this.asks.add(ask);
-        ask.setCargoRequest(this);
-        return this;
-    }
-
-    public CargoRequest removeAsk(Ask ask) {
-        this.asks.remove(ask);
-        ask.setCargoRequest(null);
-        return this;
-    }
 
     public Set<Bid> getBids() {
         return this.bids;

@@ -12,7 +12,7 @@
                                  baseTableName="bid"
                                  constraintName="fk_bid__from_user_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="app_user"/>
+                                 referencedTableName="user"/>
 
         <addForeignKeyConstraint baseColumnNames="cargo_request_id"
                                  baseTableName="bid"

@@ -139,15 +139,15 @@ public class StateProvinceResource {
     /**
      * {@code GET  /state-provinces} : get all the stateProvinces.
      *
-     * @param pageable the pagination information.
+     * @param countryId the   information.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of stateProvinces in body.
      */
-    @GetMapping("/state-provinces")
-    public ResponseEntity<List<StateProvince>> getAllStateProvinces(@org.springdoc.api.annotations.ParameterObject Pageable pageable) {
+    @GetMapping("/state-provinces/{countryId}")
+    public ResponseEntity<List<StateProvince>> getAllStateProvinces(
+        @PathVariable Long countryId        ) {
         log.debug("REST request to get a page of StateProvinces");
-        Page<StateProvince> page = stateProvinceService.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
+        List<StateProvince> allByCountryId = stateProvinceRepository.findAllByCountryId(countryId);
+         return ResponseEntity.ok(allByCountryId);
     }
 
     /**

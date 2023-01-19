@@ -29,6 +29,9 @@
             <column name="cargo_request_id" type="bigint">
                 <constraints nullable="true" />
             </column>
+            <column name="flight_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
     </changeSet>

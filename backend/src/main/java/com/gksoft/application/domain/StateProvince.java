@@ -28,10 +28,18 @@ public class StateProvince implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "country_id")
+    private String countryId;
+
+
     @OneToMany(mappedBy = "stateProvince")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "user", "userRates", "country", "stateProvince", "city" }, allowSetters = true)
     private Set<User> users = new HashSet<>();
+
+
+
+
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -61,7 +69,7 @@ public class StateProvince implements Serializable {
         this.name = name;
     }
 
-    public Set<User> getAppUsers() {
+    public Set<User> getUsers() {
         return this.users;
     }
 
@@ -75,23 +83,30 @@ public class StateProvince implements Serializable {
         this.users = appUsers;
     }
 
-    public StateProvince appUsers(Set<User> appUsers) {
+    public StateProvince  Users(Set<User> appUsers) {
         this.setUsers(appUsers);
         return this;
     }
 
-    public StateProvince addAppUser(User appUser) {
+    public StateProvince addUser(User appUser) {
         this.users.add(appUser);
         appUser.setStateProvince(this);
         return this;
     }
 
-    public StateProvince removeAppUser(User appUser) {
+    public StateProvince removeUser(User appUser) {
         this.users.remove(appUser);
         appUser.setStateProvince(null);
         return this;
     }
 
+    public String getCountryId() {
+        return countryId;
+    }
+
+    public void setCountryId(String countryId) {
+        this.countryId = countryId;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override

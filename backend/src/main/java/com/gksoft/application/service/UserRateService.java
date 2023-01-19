@@ -5,6 +5,8 @@ import com.gksoft.application.repository.UserRateRepository;
 
 import java.util.List;
 import java.util.Optional;
+
+import com.gksoft.application.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -23,8 +25,11 @@ public class UserRateService {
 
     private final UserRateRepository userRateRepository;
 
-    public UserRateService(UserRateRepository userRateRepository) {
+    private  final UserRepository userRepository;
+
+    public UserRateService(UserRateRepository userRateRepository, UserRepository userRepository) {
         this.userRateRepository = userRateRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -35,7 +40,12 @@ public class UserRateService {
      */
     public UserRate save(UserRate userRate) {
         log.debug("Request to save UserRate : {}", userRate);
-        return userRateRepository.save(userRate);
+        UserRate ur =  userRateRepository.save(userRate);
+        userRepository.updateClienttotalRate(ur.getUser().getId());
+        userRepository.updateClientAvgRate(ur.getUser().getId());
+        userRepository.updateCouriertotalRate(ur.getUser().getId());
+        userRepository.updateCourierAvgRate(ur.getUser().getId());
+        return ur;
     }
 
     /**
@@ -46,7 +56,12 @@ public class UserRateService {
      */
     public UserRate update(UserRate userRate) {
         log.debug("Request to update UserRate : {}", userRate);
-        return userRateRepository.save(userRate);
+        UserRate ur =  userRateRepository.save(userRate);
+        userRepository.updateClienttotalRate(ur.getUser().getId());
+        userRepository.updateClientAvgRate(ur.getUser().getId());
+        userRepository.updateCouriertotalRate(ur.getUser().getId());
+        userRepository.updateCourierAvgRate(ur.getUser().getId());
+        return ur;
     }
 
     /**
@@ -87,6 +102,7 @@ public class UserRateService {
         log.debug("Request to get all UserRates");
         return userRateRepository.srchRates( cargoId, userId, isCourier , pageable);
     }
+
 
     @Transactional(readOnly = true)
     public List<UserRate> findByCargoRequest(Long cargoRequestId) {

@@ -1,8 +1,10 @@
 package com.gksoft.application.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.gksoft.application.domain.enumeration.BidAskStatus;
 import java.io.Serializable;
+import java.time.Instant;
 import javax.persistence.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -35,31 +37,56 @@ public class Ask implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties(value = {  "userRates", "country", "stateProvince", "city" }, allowSetters = true)
-    private User toUser;
+    private User fromUser;
 
     @ManyToOne
     @JsonIgnoreProperties(
         value = {
-            "cargoRequestDetails",
             "asks",
-            "bids",
             "status",
             "createBy",
-            "takenBy",
             "fromCountry",
             "toCountry",
             "fromState",
             "toState",
             "fromCity",
             "toCity",
-            "reqItemTypes",
-            "userRate",
-        },
+            "availableItemTypes",
+         },
         allowSetters = true
     )
-    private CargoRequest cargoRequest;
+    private Flight flight;
+
+    @Column(name = "cargo_request_id")
+    private Long cargoRequestId;
+    @Column(name = "create_date")
+    private Instant createDate;
+
+
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
+    public Instant getCreateDate() {
+        return this.createDate;
+    }
+
+    public  Ask createDate(Instant createDate) {
+        this.setCreateDate(createDate);
+        return this;
+    }
+
+    public void setCreateDate(Instant createDate) {
+        this.createDate = createDate;
+    }
+
+    public User getFromUser() {
+        return fromUser;
+    }
+
+    public void setFromUser(User fromUser) {
+        this.fromUser = fromUser;
+    }
+
+
 
     public Long getId() {
         return this.id;
@@ -113,29 +140,30 @@ public class Ask implements Serializable {
         this.status = status;
     }
 
-    public  User getToUser() {
-        return this.toUser;
-    }
 
-    public void setToUser( User appUser) {
-        this.toUser = appUser;
-    }
-
-    public Ask toUser( User appUser) {
-        this.setToUser(appUser);
+    public Ask FromUser( User  user) {
+        this.setFromUser( user);
         return this;
     }
 
-    public CargoRequest getCargoRequest() {
-        return this.cargoRequest;
+    public Long getCargoRequestId() {
+        return cargoRequestId;
     }
 
-    public void setCargoRequest(CargoRequest cargoRequest) {
-        this.cargoRequest = cargoRequest;
+    public void setCargoRequestId(Long cargoRequestId) {
+        this.cargoRequestId = cargoRequestId;
     }
 
-    public Ask cargoRequest(CargoRequest cargoRequest) {
-        this.setCargoRequest(cargoRequest);
+    public Flight getFlight() {
+        return this.flight;
+    }
+
+    public void setFlight(Flight flight) {
+        this.flight = flight;
+    }
+
+    public Ask flight(Flight flight) {
+        this.setFlight(flight);
         return this;
     }
 

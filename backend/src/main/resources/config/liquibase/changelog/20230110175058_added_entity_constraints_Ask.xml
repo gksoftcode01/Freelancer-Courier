@@ -12,12 +12,7 @@
                                  baseTableName="ask"
                                  constraintName="fk_ask__to_user_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="app_user"/>
+                                 referencedTableName="user"/>
 
-        <addForeignKeyConstraint baseColumnNames="cargo_request_id"
-                                 baseTableName="ask"
-                                 constraintName="fk_ask__cargo_request_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="cargo_request"/>
     </changeSet>
 </databaseChangeLog>

@@ -180,6 +180,7 @@ public class UserService {
         return user;
     }
 
+
     /**
      * Update all information for a specific user, and return the modified user.
      *

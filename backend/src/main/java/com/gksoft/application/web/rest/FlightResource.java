@@ -138,21 +138,23 @@ public class FlightResource {
      * {@code GET  /flights} : get all the flights.
      *
      * @param pageable the pagination information.
-     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of flights in body.
+      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of flights in body.
      */
     @GetMapping("/flights")
     public ResponseEntity<List<Flight>> getAllFlights(
         @org.springdoc.api.annotations.ParameterObject Pageable pageable,
-        @RequestParam(required = false, defaultValue = "true") boolean eagerload
+        @RequestParam(name = "fromCountry",required = false) Long fromCountry,
+        @RequestParam(name = "toCountry",required = false) Long toCountry ,
+        @RequestParam(name = "fromState",required = false) Long fromState,
+        @RequestParam(name = "toState",required = false) Long toState,
+        @RequestParam(name = "createBy",required = false) Long createBy,
+        @RequestParam(name = "status",required = false) String status
     ) {
         log.debug("REST request to get a page of Flights");
         Page<Flight> page;
-        if (eagerload) {
-            page = flightService.findAllWithEagerRelationships(pageable);
-        } else {
-            page = flightService.findAll(pageable);
-        }
+
+            page = flightRepository.srchFlight(fromCountry,toCountry,fromState,toState,createBy,status,pageable);
+
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

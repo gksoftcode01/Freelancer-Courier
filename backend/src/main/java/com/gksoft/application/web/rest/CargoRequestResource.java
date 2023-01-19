@@ -141,27 +141,26 @@ public class CargoRequestResource {
      * {@code GET  /cargo-requests} : get all the cargoRequests.
      *
      * @param pageable the pagination information.
-     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
-     * @param filter the filter of the request.
+
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of cargoRequests in body.
      */
     @GetMapping("/cargo-requests")
     public ResponseEntity<List<CargoRequest>> getAllCargoRequests(
         @org.springdoc.api.annotations.ParameterObject Pageable pageable,
-        @RequestParam(required = false) String filter,
-        @RequestParam(required = false, defaultValue = "true") boolean eagerload
+         @RequestParam(name = "fromCountry",required = false) Long fromCountry,
+        @RequestParam(name = "toCountry",required = false) Long toCountry ,
+        @RequestParam(name = "fromState",required = false) Long fromState,
+        @RequestParam(name = "toState",required = false) Long toState,
+        @RequestParam(name = "createBy",required = false) Long createBy,
+        @RequestParam(name = "statusId",required = false) Long statusId
+
     ) {
-        if ("userrate-is-null".equals(filter)) {
-            log.debug("REST request to get all CargoRequests where userRate is null");
-            return new ResponseEntity<>(cargoRequestService.findAllWhereUserRateIsNull(), HttpStatus.OK);
-        }
+
+
         log.debug("REST request to get a page of CargoRequests");
         Page<CargoRequest> page;
-        if (eagerload) {
-            page = cargoRequestService.findAllWithEagerRelationships(pageable);
-        } else {
-            page = cargoRequestService.findAll(pageable);
-        }
+             page = cargoRequestRepository.srchCargoRequest(fromCountry,toCountry,fromState,toState,createBy,statusId,pageable);
+
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

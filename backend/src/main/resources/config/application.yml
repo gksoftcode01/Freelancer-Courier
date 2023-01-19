@@ -103,7 +103,7 @@ spring:
         - dev
         - api-docs
         # Uncomment to activate TLS for the dev profile
-        #- tls
+        - no-liquibase
   jmx:
     enabled: false
   data:

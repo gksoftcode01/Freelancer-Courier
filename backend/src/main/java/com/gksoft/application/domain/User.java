@@ -25,7 +25,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  */
 @Entity
 @Table(name = "jhi_user")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class User extends AbstractAuditingEntity<Long> implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -101,6 +100,16 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
     @Column(name = "mobile_number")
     private String mobileNumber;
 
+    @Column(name = "avg_rate_courier")
+    private Float avgRateCourier;
+    @Column(name = "total_rate_courier")
+    private Float totalRateCourier;
+
+    @Column(name = "avg_rate_client")
+    private Float avgRateClient;
+    @Column(name = "total_rate_client")
+    private Float totalRateClient;
+
     @JsonIgnore
     @ManyToMany
     @JoinTable(
@@ -127,6 +136,7 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties(value = { "users" }, allowSetters = true)
     private City city;
+
 
     public Set<UserRate> getUserRates() {
         return userRates;
@@ -303,6 +313,38 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
 
     public void setAuthorities(Set<Authority> authorities) {
         this.authorities = authorities;
+    }
+
+    public Float getAvgRateCourier() {
+        return avgRateCourier;
+    }
+
+    public void setAvgRateCourier(Float avgRateCourier) {
+        this.avgRateCourier = avgRateCourier;
+    }
+
+    public Float getTotalRateCourier() {
+        return totalRateCourier;
+    }
+
+    public void setTotalRateCourier(Float totalRateCourier) {
+        this.totalRateCourier = totalRateCourier;
+    }
+
+    public Float getAvgRateClient() {
+        return avgRateClient;
+    }
+
+    public void setAvgRateClient(Float avgRateClient) {
+        this.avgRateClient = avgRateClient;
+    }
+
+    public Float getTotalRateClient() {
+        return totalRateClient;
+    }
+
+    public void setTotalRateClient(Float totalRateClient) {
+        this.totalRateClient = totalRateClient;
     }
 
     @Override

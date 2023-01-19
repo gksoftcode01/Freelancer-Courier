@@ -116,7 +116,7 @@ public class FlightService {
     @Transactional(readOnly = true)
     public Optional<Flight> findOne(Long id) {
         log.debug("Request to get Flight : {}", id);
-        return flightRepository.findOneWithEagerRelationships(id);
+        return flightRepository.findById(id);
     }
 
     /**

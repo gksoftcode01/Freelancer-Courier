@@ -36,7 +36,7 @@ public class CargoRequestService {
      */
     public CargoRequest save(CargoRequest cargoRequest) {
         log.debug("Request to save CargoRequest : {}", cargoRequest);
-        return cargoRequestRepository.save(cargoRequest);
+         return cargoRequestRepository.save(cargoRequest);
     }
 
     /**

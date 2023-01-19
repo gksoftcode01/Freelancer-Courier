@@ -6,6 +6,7 @@ import com.gksoft.application.service.AskService;
 import com.gksoft.application.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.Instant;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -59,6 +60,7 @@ public class AskResource {
         if (ask.getId() != null) {
             throw new BadRequestAlertException("A new ask cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        ask.setCreateDate(Instant.now());
         Ask result = askService.save(ask);
         return ResponseEntity
             .created(new URI("/api/asks/" + result.getId()))

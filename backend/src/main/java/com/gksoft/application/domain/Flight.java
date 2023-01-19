@@ -15,8 +15,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  */
 @Entity
 @Table(name = "flight")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@SuppressWarnings("common-java:DuplicatedBlocks")
+ @SuppressWarnings("common-java:DuplicatedBlocks")
 public class Flight implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -77,7 +76,7 @@ public class Flight implements Serializable {
     @JsonIgnoreProperties(value = { "Users" }, allowSetters = true)
     private City toCity;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "rel_flight__available_item_types",
         joinColumns = @JoinColumn(name = "flight_id"),
@@ -85,6 +84,11 @@ public class Flight implements Serializable {
     )
      @JsonIgnoreProperties(value = { "flights", "cargoRequests" }, allowSetters = true)
     private Set<ItemTypes> availableItemTypes = new HashSet<>();
+
+
+    @OneToMany(mappedBy = "flight",fetch = FetchType.EAGER)
+    @JsonIgnoreProperties(value = { "toUser", "cargoRequest" }, allowSetters = true)
+    private Set<Ask> asks = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -305,6 +309,36 @@ public class Flight implements Serializable {
     public Flight removeAvailableItemTypes(ItemTypes itemTypes) {
         this.availableItemTypes.remove(itemTypes);
         itemTypes.getFlights().remove(this);
+        return this;
+    }
+    public Set<Ask> getAsks() {
+        return this.asks;
+    }
+
+    public void setAsks(Set<Ask> asks) {
+        if (this.asks != null) {
+            this.asks.forEach(i -> i.setFlight(null));
+        }
+        if (asks != null) {
+            asks.forEach(i -> i.setFlight(this));
+        }
+        this.asks = asks;
+    }
+
+    public Flight asks(Set<Ask> asks) {
+        this.setAsks(asks);
+        return this;
+    }
+
+    public Flight addAsk(Ask ask) {
+        this.asks.add(ask);
+        ask.setFlight(this);
+        return this;
+    }
+
+    public Flight removeAsk(Ask ask) {
+        this.asks.remove(ask);
+        ask.setFlight(null);
         return this;
     }
 

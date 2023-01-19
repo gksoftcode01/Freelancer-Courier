@@ -33,6 +33,10 @@ public class Country implements Serializable {
     @JsonIgnoreProperties(value = {  "userRates", "country", "stateProvince", "country" }, allowSetters = true)
     private Set<User> users = new HashSet<>();
 
+
+
+
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
@@ -80,19 +84,20 @@ public class Country implements Serializable {
         return this;
     }
 
-    public Country addAppUser(User user) {
+    public Country addUser(User user) {
         this.users.add(user);
         user.setCountry(this);
         return this;
     }
 
-    public Country removeAppUser(User users) {
+    public Country removeUser(User users) {
         this.users.remove(users);
         users.setCountry(null);
         return this;
     }
 
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+
+// jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {

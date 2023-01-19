@@ -135,15 +135,14 @@ public class CityResource {
     /**
      * {@code GET  /cities} : get all the cities.
      *
-     * @param pageable the pagination information.
+     * @param stateId the   information.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of cities in body.
      */
     @GetMapping("/cities")
-    public ResponseEntity<List<City>> getAllCities(@org.springdoc.api.annotations.ParameterObject Pageable pageable) {
+    public ResponseEntity<List<City>> getAllCities(@PathVariable Long stateId) {
         log.debug("REST request to get a page of Cities");
-        Page<City> page = cityService.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
+        List<City> allByStateId = cityRepository.findAllByStateId(stateId);
+         return ResponseEntity.ok(allByStateId) ;
     }
 
     /**
