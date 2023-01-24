@@ -29,7 +29,7 @@ public class StateProvince implements Serializable {
     private String name;
 
     @Column(name = "country_id")
-    private String countryId;
+    private Long countryId;
 
 
     @OneToMany(mappedBy = "stateProvince")
@@ -100,11 +100,11 @@ public class StateProvince implements Serializable {
         return this;
     }
 
-    public String getCountryId() {
+    public Long getCountryId() {
         return countryId;
     }
 
-    public void setCountryId(String countryId) {
+    public void setCountryId(Long countryId) {
         this.countryId = countryId;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

@@ -27,12 +27,14 @@ public interface CargoRequestRepository extends CargoRequestRepositoryWithBagRel
         " and (:toCountry is null or TO_COUNTRY_ID = :toCountry) " +
         " and(:fromState is null or FROM_STATE_ID = :fromState) " +
         " and (:toState is null or TO_STATE_ID = :toState) " +
-        " and  (:createBy is null or CREATE_BY_ID = :createBy) " +
-        " and  (:statusId is null or STATUS_ID = :statusId) ",nativeQuery = true)
+        " and  (not :isMine  or (:isMine and CREATE_BY_ID = :createBy) )  " +
+        " and  (:statusId is null or STATUS_ID = :statusId) " +
+        " and (not :isBid or  ( 0 < (SELECT count(1) FROM Bid where CARGO_REQUEST_ID =cargo_request.ID and :createBy=FROM_USER_ID )  ))",nativeQuery = true)
     Page<CargoRequest> srchCargoRequest(@Param("fromCountry") Long fromCountry, @Param("toCountry") Long toCountry,
                                         @Param("fromState")  Long fromState, @Param("toState") Long toState,
                                         @Param("createBy") Long createBy,
-                                        @Param("statusId")  Long statusId, Pageable pageable);
+                                        @Param("statusId")  Long statusId,
+                                        @Param("isMine")  boolean isMine, @Param("isBid")  boolean isBid, Pageable pageable);
 
     default Optional<CargoRequest> findOneWithEagerRelationships(Long id) {
         return this.fetchBagRelationships(this.findOneWithToOneRelationships(id));

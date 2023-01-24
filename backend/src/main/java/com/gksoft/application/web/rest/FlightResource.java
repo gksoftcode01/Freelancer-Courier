@@ -148,12 +148,14 @@ public class FlightResource {
         @RequestParam(name = "fromState",required = false) Long fromState,
         @RequestParam(name = "toState",required = false) Long toState,
         @RequestParam(name = "createBy",required = false) Long createBy,
-        @RequestParam(name = "status",required = false) String status
+        @RequestParam(name = "status",required = false) String status,
+        @RequestParam(name = "isMine",required = false) boolean isMine,
+        @RequestParam(name = "isAskSent",required = false) boolean isAsk
     ) {
         log.debug("REST request to get a page of Flights");
         Page<Flight> page;
 
-            page = flightRepository.srchFlight(fromCountry,toCountry,fromState,toState,createBy,status,pageable);
+            page = flightRepository.srchFlight(fromCountry,toCountry,fromState,toState,createBy,status,isAsk,isMine,pageable);
 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());

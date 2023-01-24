@@ -142,9 +142,9 @@ public class StateProvinceResource {
      * @param countryId the   information.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of stateProvinces in body.
      */
-    @GetMapping("/state-provinces/{countryId}")
+    @GetMapping("/state-provinces")
     public ResponseEntity<List<StateProvince>> getAllStateProvinces(
-        @PathVariable Long countryId        ) {
+        @RequestParam(name = "countryId",required = false) Long countryId     ) {
         log.debug("REST request to get a page of StateProvinces");
         List<StateProvince> allByCountryId = stateProvinceRepository.findAllByCountryId(countryId);
          return ResponseEntity.ok(allByCountryId);

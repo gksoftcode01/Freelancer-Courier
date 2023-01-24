@@ -23,12 +23,16 @@ public interface FlightRepository extends FlightRepositoryWithBagRelationships, 
         " and (:toCountry is null or TO_COUNTRY_ID = :toCountry) " +
         " and (:fromState is null or FROM_STATE_ID = :fromState) " +
         " and (:toState is null or TO_STATE_ID = :toState) " +
-        " and  (:createBy is null or CREATE_BY_ID = :createBy) " +
-        " and  (:status is null or STATUS = :status) ",nativeQuery = true)
+        " and  (not :isMine   or (:isMine and CREATE_BY_ID = :createBy) ) " +
+        " and  (:status is null or STATUS = :status) " +
+        " and (not :isAsk or  ( 0 < (SELECT count(1) FROM ASK where FLIGHT_ID =FLIGHT.ID and FROM_USER_ID =:createBy  )  )) " +
+        " and FLIGHT_DATE >= sysdate",nativeQuery = true)
     Page<Flight> srchFlight(@Param("fromCountry") Long fromCountry, @Param("toCountry") Long toCountry,
                                         @Param("fromState")  Long fromState, @Param("toState") Long toState,
                                         @Param("createBy") Long createBy,
-                                        @Param("status")  String status, Pageable pageable);
+                                        @Param("status")  String status,  @Param("isAsk")  boolean isAsk,
+                                        @Param("isMine")  boolean isMine,
+                                        Pageable pageable);
 
     default Optional<Flight> findOneWithEagerRelationships(Long id) {
         return this.fetchBagRelationships(this.findOneWithToOneRelationships(id));

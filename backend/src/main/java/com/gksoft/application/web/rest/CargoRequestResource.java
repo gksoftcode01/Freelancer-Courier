@@ -152,14 +152,17 @@ public class CargoRequestResource {
         @RequestParam(name = "fromState",required = false) Long fromState,
         @RequestParam(name = "toState",required = false) Long toState,
         @RequestParam(name = "createBy",required = false) Long createBy,
-        @RequestParam(name = "statusId",required = false) Long statusId
+        @RequestParam(name = "statusId",required = false) Long statusId,
+        @RequestParam(name = "isMine",required = false) boolean isMine,
+        @RequestParam(name = "isBidSent",required = false) boolean isBid
 
     ) {
 
 
         log.debug("REST request to get a page of CargoRequests");
         Page<CargoRequest> page;
-             page = cargoRequestRepository.srchCargoRequest(fromCountry,toCountry,fromState,toState,createBy,statusId,pageable);
+             page = cargoRequestRepository.srchCargoRequest(fromCountry,toCountry,fromState,toState,createBy,statusId,
+                 isMine,isBid,pageable);
 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());

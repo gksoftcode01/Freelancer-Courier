@@ -137,15 +137,13 @@ public class CountryResource {
     /**
      * {@code GET  /countries} : get all the countries.
      *
-     * @param pageable the pagination information.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of countries in body.
+      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of countries in body.
      */
     @GetMapping("/countries")
-    public ResponseEntity<List<Country>> getAllCountries(@org.springdoc.api.annotations.ParameterObject Pageable pageable) {
+    public ResponseEntity<List<Country>> getAllCountries( ) {
         log.debug("REST request to get a page of Countries");
-        Page<Country> page = countryService.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
+        List<Country> countryList = countryRepository.findAll();
+         return ResponseEntity.ok(countryList) ;
     }
 
     /**

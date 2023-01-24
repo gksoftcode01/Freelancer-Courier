@@ -139,7 +139,7 @@ public class CityResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of cities in body.
      */
     @GetMapping("/cities")
-    public ResponseEntity<List<City>> getAllCities(@PathVariable Long stateId) {
+    public ResponseEntity<List<City>> getAllCities(@RequestParam(name = "stateId",required = false) Long stateId   ) {
         log.debug("REST request to get a page of Cities");
         List<City> allByStateId = cityRepository.findAllByStateId(stateId);
          return ResponseEntity.ok(allByStateId) ;

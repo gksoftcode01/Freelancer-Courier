@@ -86,7 +86,7 @@ public class CargoRequest implements Serializable {
     @JsonIgnoreProperties(value = { "Users" }, allowSetters = true)
     private City toCity;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "rel_cargo_request__req_item_types",
         joinColumns = @JoinColumn(name = "cargo_request_id"),
