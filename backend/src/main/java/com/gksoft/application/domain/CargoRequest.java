@@ -102,7 +102,71 @@ public class CargoRequest implements Serializable {
     @JsonIgnoreProperties(value = { "cargoRequest", "user" }, allowSetters = true)
     private Set<UserRate> userRates = new HashSet<>();
 
+    @Column(name = "width")
+    private Long width;
+
+    @Column(name = "length")
+    private Long length;
+
+    @Column(name = "height")
+    private Long height;
+
+    @Column(name = "description")
+    private Long description;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
+
+    public Boolean getToDoor() {
+        return isToDoor;
+    }
+
+    public void setToDoor(Boolean toDoor) {
+        isToDoor = toDoor;
+    }
+
+    public Long getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Long weight) {
+        this.weight = weight;
+    }
+
+    public Set<UserRate> getUserRates() {
+        return userRates;
+    }
+
+    public Long getWidth() {
+        return width;
+    }
+
+    public void setWidth(Long width) {
+        this.width = width;
+    }
+
+    public Long getLength() {
+        return length;
+    }
+
+    public void setLength(Long length) {
+        this.length = length;
+    }
+
+    public Long getHeight() {
+        return height;
+    }
+
+    public void setHeight(Long height) {
+        this.height = height;
+    }
+
+    public Long getDescription() {
+        return description;
+    }
+
+    public void setDescription(Long description) {
+        this.description = description;
+    }
 
     public Long getId() {
         return this.id;

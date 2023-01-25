@@ -1,11 +1,13 @@
 package com.gksoft.application.web.rest;
 
 import com.gksoft.application.domain.CargoRequest;
+import com.gksoft.application.domain.CargoRequestStatus;
 import com.gksoft.application.repository.CargoRequestRepository;
 import com.gksoft.application.service.CargoRequestService;
 import com.gksoft.application.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.Instant;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -60,6 +62,7 @@ public class CargoRequestResource {
         if (cargoRequest.getId() != null) {
             throw new BadRequestAlertException("A new cargoRequest cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        cargoRequest.createDate(Instant.now());
         CargoRequest result = cargoRequestService.save(cargoRequest);
         return ResponseEntity
             .created(new URI("/api/cargo-requests/" + result.getId()))
