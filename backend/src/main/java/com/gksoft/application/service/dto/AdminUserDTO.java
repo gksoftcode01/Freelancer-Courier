@@ -2,7 +2,10 @@ package com.gksoft.application.service.dto;
 
 import com.gksoft.application.config.Constants;
 import com.gksoft.application.domain.Authority;
+import com.gksoft.application.domain.Country;
 import com.gksoft.application.domain.User;
+import com.gksoft.application.domain.enumeration.GenderType;
+
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Set;
@@ -33,8 +36,7 @@ public class AdminUserDTO implements Serializable {
     @Size(min = 5, max = 254)
     private String email;
 
-    @Size(max = 256)
-    private String imageUrl;
+     private String imageUrl;
 
     private boolean activated = false;
 
@@ -51,9 +53,21 @@ public class AdminUserDTO implements Serializable {
 
     private Set<String> authorities;
 
+    private Instant birthDate;
+
+    private GenderType gender;
+    private Instant registerDate;
+    private String mobileNumber;
+    private Float avgRateCourier;
+    private Float totalRateCourier;
+    private Float avgRateClient;
+
+    private Float totalRateClient;
+    private Country country;
     public AdminUserDTO() {
         // Empty constructor needed for Jackson.
     }
+
 
     public AdminUserDTO(User user) {
         this.id = user.getId();
@@ -69,8 +83,87 @@ public class AdminUserDTO implements Serializable {
         this.lastModifiedBy = user.getLastModifiedBy();
         this.lastModifiedDate = user.getLastModifiedDate();
         this.authorities = user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet());
+        this.birthDate = user.getBirthDate();
+        this.avgRateClient = user.getAvgRateClient();
+        this.totalRateClient = user.getTotalRateClient();
+        this.avgRateCourier=user.getAvgRateCourier();
+        this.totalRateCourier=user.getTotalRateCourier();
+        this.country=user.getCountry();
+        this.gender = user.getGender();
+        this.mobileNumber = user.getMobileNumber();
     }
 
+    public Instant getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Instant birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public GenderType getGender() {
+        return gender;
+    }
+
+    public void setGender(GenderType gender) {
+        this.gender = gender;
+    }
+
+    public Instant getRegisterDate() {
+        return registerDate;
+    }
+
+    public void setRegisterDate(Instant registerDate) {
+        this.registerDate = registerDate;
+    }
+
+    public String getMobileNumber() {
+        return mobileNumber;
+    }
+
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
+    }
+
+    public Float getAvgRateCourier() {
+        return avgRateCourier;
+    }
+
+    public void setAvgRateCourier(Float avgRateCourier) {
+        this.avgRateCourier = avgRateCourier;
+    }
+
+    public Float getTotalRateCourier() {
+        return totalRateCourier;
+    }
+
+    public void setTotalRateCourier(Float totalRateCourier) {
+        this.totalRateCourier = totalRateCourier;
+    }
+
+    public Float getAvgRateClient() {
+        return avgRateClient;
+    }
+
+    public void setAvgRateClient(Float avgRateClient) {
+        this.avgRateClient = avgRateClient;
+    }
+
+    public Float getTotalRateClient() {
+        return totalRateClient;
+    }
+
+    public void setTotalRateClient(Float totalRateClient) {
+        this.totalRateClient = totalRateClient;
+    }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
     public Long getId() {
         return id;
     }
