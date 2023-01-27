@@ -2,7 +2,9 @@ package com.gksoft.application.service;
 
 import com.gksoft.application.config.Constants;
 import com.gksoft.application.domain.Authority;
+import com.gksoft.application.domain.Country;
 import com.gksoft.application.domain.User;
+import com.gksoft.application.domain.enumeration.GenderType;
 import com.gksoft.application.repository.AuthorityRepository;
 import com.gksoft.application.repository.UserRepository;
 import com.gksoft.application.security.AuthoritiesConstants;
@@ -238,7 +240,8 @@ public class UserService {
      * @param langKey   language key.
      * @param imageUrl  image URL of user.
      */
-    public void updateUser(String firstName, String lastName, String email, String langKey, String imageUrl) {
+    public void updateUser(String firstName, String lastName, String email, String langKey, String imageUrl,
+                           Instant birthDate , GenderType gender , String mobileNumber, Country country) {
         SecurityUtils
             .getCurrentUserLogin()
             .flatMap(userRepository::findOneByLogin)
@@ -250,6 +253,11 @@ public class UserService {
                 }
                 user.setLangKey(langKey);
                 user.setImageUrl(imageUrl);
+                user.setBirthDate(birthDate);
+                user.setGender(gender);
+                user.setMobileNumber(mobileNumber);
+                user.setCountry(country);
+
                 this.clearUserCaches(user);
                 log.debug("Changed Information for User: {}", user);
             });
@@ -323,4 +331,10 @@ public class UserService {
             Objects.requireNonNull(cacheManager.getCache(UserRepository.USERS_BY_EMAIL_CACHE)).evict(user.getEmail());
         }
     }
+
+    @Transactional(readOnly = true)
+    public Optional<AdminUserDTO> getUser( Long userId  ) {
+        return userRepository.findById(userId).map(AdminUserDTO::new);
+    }
+
 }

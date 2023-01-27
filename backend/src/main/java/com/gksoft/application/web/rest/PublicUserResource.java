@@ -1,6 +1,7 @@
 package com.gksoft.application.web.rest;
 
 import com.gksoft.application.service.UserService;
+import com.gksoft.application.service.dto.AdminUserDTO;
 import com.gksoft.application.service.dto.UserDTO;
 import java.util.*;
 import java.util.Collections;
@@ -32,6 +33,14 @@ public class PublicUserResource {
         this.userService = userService;
     }
 
+      @GetMapping("/users/{userId}")
+      public ResponseEntity<AdminUserDTO> getUSer(@PathVariable Long userId){
+          AdminUserDTO user = userService.getUser(userId).get();
+           return   ResponseEntity.ok(user);
+      }
+
+
+
     /**
      * {@code GET /users} : get all users with only the public informations - calling this are allowed for anyone.
      *
@@ -50,6 +59,9 @@ public class PublicUserResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+
+
+
     private boolean onlyContainsAllowedProperties(Pageable pageable) {
         return pageable.getSort().stream().map(Sort.Order::getProperty).allMatch(ALLOWED_ORDERED_PROPERTIES::contains);
     }
@@ -62,4 +74,7 @@ public class PublicUserResource {
     public List<String> getAuthorities() {
         return userService.getAuthorities();
     }
+
+
+
 }

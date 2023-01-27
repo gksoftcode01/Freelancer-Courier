@@ -124,7 +124,7 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
     @JsonIgnoreProperties(value = { "cargoRequest", "user" }, allowSetters = true)
     private Set<UserRate> userRates = new HashSet<>();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties(value = { "users" }, allowSetters = true)
     private Country country;
 
@@ -146,7 +146,7 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
     }
 
     public Country getCountry() {
-        return country;
+        return this.country;
     }
 
     public void setCountry(Country country) {
