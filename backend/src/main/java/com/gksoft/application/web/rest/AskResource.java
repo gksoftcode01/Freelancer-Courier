@@ -3,6 +3,8 @@ package com.gksoft.application.web.rest;
 import com.gksoft.application.domain.Ask;
 import com.gksoft.application.repository.AskRepository;
 import com.gksoft.application.service.AskService;
+import com.gksoft.application.service.FlightService;
+import com.gksoft.application.service.NotificationService;
 import com.gksoft.application.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -16,7 +18,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -42,9 +43,14 @@ public class AskResource {
 
     private final AskRepository askRepository;
 
-    public AskResource(AskService askService, AskRepository askRepository) {
+    private final NotificationService notificationService;
+private  final FlightService flightService;
+
+    public AskResource(AskService askService, AskRepository askRepository, NotificationService notificationService, FlightService flightService) {
         this.askService = askService;
         this.askRepository = askRepository;
+        this.notificationService = notificationService;
+        this.flightService = flightService;
     }
 
     /**
@@ -62,6 +68,7 @@ public class AskResource {
         }
         ask.setCreateDate(Instant.now());
         Ask result = askService.save(ask);
+        notificationService.newAskNotify(flightService.findOne(result.getFlight().getId()).get(),   result);
         return ResponseEntity
             .created(new URI("/api/asks/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))

@@ -114,7 +114,19 @@ public class CargoRequest implements Serializable {
     @Column(name = "description")
     private Long description;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 
     public Boolean getToDoor() {
         return isToDoor;

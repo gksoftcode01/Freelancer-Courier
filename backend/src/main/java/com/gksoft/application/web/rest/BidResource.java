@@ -3,6 +3,8 @@ package com.gksoft.application.web.rest;
 import com.gksoft.application.domain.Bid;
 import com.gksoft.application.repository.BidRepository;
 import com.gksoft.application.service.BidService;
+import com.gksoft.application.service.CargoRequestService;
+import com.gksoft.application.service.NotificationService;
 import com.gksoft.application.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -16,7 +18,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -39,12 +40,16 @@ public class BidResource {
     private String applicationName;
 
     private final BidService bidService;
+    private final CargoRequestService cargoRequestService;
 
     private final BidRepository bidRepository;
+private  final NotificationService notificationService;
 
-    public BidResource(BidService bidService, BidRepository bidRepository) {
+    public BidResource(BidService bidService, CargoRequestService cargoRequestService, BidRepository bidRepository, NotificationService notificationService) {
         this.bidService = bidService;
+        this.cargoRequestService = cargoRequestService;
         this.bidRepository = bidRepository;
+        this.notificationService = notificationService;
     }
 
     /**
@@ -62,6 +67,8 @@ public class BidResource {
         }
         bid.setCreateDate(Instant.now());
         Bid result = bidService.save(bid);
+        log.debug("notify  Bid : {}", bid);
+        notificationService.newBidNotify(cargoRequestService.findOne(result.getCargoRequest().getId()).get(), result);
         return ResponseEntity
             .created(new URI("/api/bids/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
@@ -94,6 +101,8 @@ public class BidResource {
         }
 
         Bid result = bidService.update(bid);
+
+        notificationService.bidStatusNotify(cargoRequestService.findOne(result.getCargoRequest().getId()).get(),result);
         return ResponseEntity
             .ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, bid.getId().toString()))
