@@ -10,6 +10,8 @@ import com.gksoft.application.service.dto.PasswordChangeDTO;
 import com.gksoft.application.web.rest.errors.*;
 import com.gksoft.application.web.rest.vm.KeyAndPasswordVM;
 import com.gksoft.application.web.rest.vm.ManagedUserVM;
+
+import java.time.LocalDateTime;
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -17,6 +19,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -46,6 +49,8 @@ public class AccountResource {
         this.userService = userService;
         this.mailService = mailService;
     }
+
+
 
     /**
      * {@code POST  /register} : register the user.

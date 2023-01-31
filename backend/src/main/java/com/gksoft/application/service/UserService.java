@@ -94,7 +94,40 @@ public class UserService {
                 return user;
             });
     }
+    public User registerUserOtp(AdminUserDTO userDTO) {
+        userRepository
+            .findOneByLogin(userDTO.getLogin().toLowerCase())
+            .ifPresent(existingUser -> {
+                boolean removed = removeNonActivatedUser(existingUser);
+                if (!removed) {
+                    throw new UsernameAlreadyUsedException();
+                }
+            });
+        userRepository
+            .findOneByEmailIgnoreCase(userDTO.getEmail())
+            .ifPresent(existingUser -> {
+                boolean removed = removeNonActivatedUser(existingUser);
+                if (!removed) {
+                    throw new EmailAlreadyUsedException();
+                }
+            });
+        User newUser = new User();
+         newUser.setLogin(userDTO.getLogin().toLowerCase());
+        // new user gets initially a generated password
+        newUser.setPassword("");
 
+
+        newUser.setLangKey("en");
+         newUser.setActivated(true);
+        // new user gets registration key
+         Set<Authority> authorities = new HashSet<>();
+        authorityRepository.findById(AuthoritiesConstants.USER).ifPresent(authorities::add);
+        newUser.setAuthorities(authorities);
+        userRepository.save(newUser);
+        this.clearUserCaches(newUser);
+        log.debug("Created Information for User: {}", newUser);
+        return newUser;
+    }
     public User registerUser(AdminUserDTO userDTO, String password) {
         userRepository
             .findOneByLogin(userDTO.getLogin().toLowerCase())
