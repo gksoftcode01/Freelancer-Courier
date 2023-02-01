@@ -91,6 +91,11 @@ management:
             enabled: true
 
 spring:
+  h2:
+   console:
+     enabled: true
+     settings:
+          web-allow-others: true
   application:
     name: FreelancerCourier
   profiles:
