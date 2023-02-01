@@ -8,7 +8,7 @@
     <groupId>com.gksoft.application</groupId>
     <artifactId>freelancer-courier</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
     <name>Freelancer Courier</name>
     <description>Description for FreelancerCourier</description>
 
@@ -309,8 +309,6 @@
             <artifactId>twilio</artifactId>
             <version>9.0.0-rc.5</version>
         </dependency>
-
-
         <!-- jhipster-needle-maven-add-dependency -->
     </dependencies>
 
@@ -377,7 +375,6 @@
                 <groupId>org.gaul</groupId>
                 <artifactId>modernizer-maven-plugin</artifactId>
             </plugin>
-
             <!-- jhipster-needle-maven-add-plugin -->
         </plugins>
         <pluginManagement>
@@ -774,7 +771,7 @@
     <profiles>
         <profile>
             <id>no-liquibase</id>
-            <properties>
+             <properties>
                 <profile.no-liquibase>,no-liquibase</profile.no-liquibase>
             </properties>
         </profile>
@@ -793,8 +790,7 @@
         <profile>
             <id>webapp</id>
             <activation>
-                <activeByDefault>false</activeByDefault>
-
+                <activeByDefault>true</activeByDefault>
             </activation>
             <build>
                 <plugins>
