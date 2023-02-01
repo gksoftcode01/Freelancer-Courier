@@ -42,6 +42,8 @@ spring:
     console:
       # disable spring boot built-in h2-console since we start it manually with correct configuration
       enabled: false
+      settings:
+        web-allow-others: true
   jpa:
   liquibase:
     # Remove 'faker' if you do not want the sample data to be loaded automatically
