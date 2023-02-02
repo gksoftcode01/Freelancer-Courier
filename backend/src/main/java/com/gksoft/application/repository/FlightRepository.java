@@ -26,7 +26,7 @@ public interface FlightRepository extends FlightRepositoryWithBagRelationships, 
         " and  (not :isMine   or (:isMine and CREATE_BY_ID = :createBy) ) " +
         " and  (:status is null or STATUS = :status) " +
         " and (not :isAsk or  ( 0 < (SELECT count(1) FROM ASK where FLIGHT_ID =FLIGHT.ID and FROM_USER_ID =:createBy  )  )) " +
-        " and FLIGHT_DATE >= sysdate",nativeQuery = true)
+        " ",nativeQuery = true)
     Page<Flight> srchFlight(@Param("fromCountry") Long fromCountry, @Param("toCountry") Long toCountry,
                                         @Param("fromState")  Long fromState, @Param("toState") Long toState,
                                         @Param("createBy") Long createBy,

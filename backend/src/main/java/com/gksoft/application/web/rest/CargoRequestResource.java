@@ -1,8 +1,10 @@
 package com.gksoft.application.web.rest;
 
 import com.gksoft.application.domain.CargoRequest;
-import com.gksoft.application.domain.CargoRequestStatus;
+import com.gksoft.application.domain.User;
 import com.gksoft.application.repository.CargoRequestRepository;
+import com.gksoft.application.repository.UserRepository;
+import com.gksoft.application.security.SecurityUtils;
 import com.gksoft.application.service.CargoRequestService;
 import com.gksoft.application.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
@@ -11,14 +13,13 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.StreamSupport;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -43,10 +44,11 @@ public class CargoRequestResource {
     private final CargoRequestService cargoRequestService;
 
     private final CargoRequestRepository cargoRequestRepository;
-
-    public CargoRequestResource(CargoRequestService cargoRequestService, CargoRequestRepository cargoRequestRepository) {
+private  final UserRepository userRepository;
+    public CargoRequestResource(CargoRequestService cargoRequestService, CargoRequestRepository cargoRequestRepository, UserRepository userRepository) {
         this.cargoRequestService = cargoRequestService;
         this.cargoRequestRepository = cargoRequestRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -63,6 +65,10 @@ public class CargoRequestResource {
             throw new BadRequestAlertException("A new cargoRequest cannot already have an ID", ENTITY_NAME, "idexists");
         }
         cargoRequest.createDate(Instant.now());
+       User u =  SecurityUtils
+            .getCurrentUserLogin()
+            .flatMap(userRepository::findOneByLogin).get() ;
+        cargoRequest.setCreateBy(u);
         CargoRequest result = cargoRequestService.save(cargoRequest);
         return ResponseEntity
             .created(new URI("/api/cargo-requests/" + result.getId()))
@@ -96,7 +102,10 @@ public class CargoRequestResource {
         if (!cargoRequestRepository.existsById(id)) {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
-
+        User u =  SecurityUtils
+            .getCurrentUserLogin()
+            .flatMap(userRepository::findOneByLogin).get() ;
+        cargoRequest.setCreateBy(u);
         CargoRequest result = cargoRequestService.update(cargoRequest);
         return ResponseEntity
             .ok()
