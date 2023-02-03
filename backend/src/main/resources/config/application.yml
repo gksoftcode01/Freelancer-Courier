@@ -162,6 +162,7 @@ spring:
 
 server:
   servlet:
+    context-path: /freeCourier
     session:
       cookie:
         http-only: true
